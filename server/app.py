@@ -5,16 +5,16 @@ import pymysql
 
 # load .env secret to python file
 load_dotenv()
-ENDPOINT=os.getenv("AWS_RDS_ENDPOINT")
+ENDPOINT = os.getenv("AWS_RDS_ENDPOINT")
 DB_NAME = os.getenv("AWS_RDS_DB_NAME")
-USERNAME=os.getenv("USERNAME")
-PASSWORD=os.getenv("PASSWORD")
-PORT=os.getenv("PORT")
+USERNAME = os.getenv("USERNAME")
+PASSWORD = os.getenv("PASSWORD")
+PORT = os.getenv("PORT")
 
 # init Flask app
 app = Flask(__name__)
 
-db = pymysql.connect(host=ENDPOINT, user=USERNAME, password=PASSWORD, db=DB_NAME)
+db = pymysql.connect(host=ENDPOINT, user=USERNAME, password=PASSWORD, port=PORT, db=DB_NAME)
 cursor = db.cursor()
 
 showTable = """
