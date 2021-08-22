@@ -1,6 +1,7 @@
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from dotenv import load_dotenv
+from flask_cors import CORS
 import pymysql
 
 # load .env secret to python file
@@ -13,20 +14,24 @@ PORT = os.getenv("PORT")
 
 # init Flask app
 app = Flask(__name__)
-
-db = pymysql.connect(host=ENDPOINT, user=USERNAME, password=PASSWORD, port=PORT, db=DB_NAME)
+CORS(app)
+db = pymysql.connect(host=ENDPOINT, user=USERNAME, password=PASSWORD, db=DB_NAME)
 cursor = db.cursor()
 
 showTable = """
     show tables
 """
 
-@app.route('/')
+@app.route('/tables')
 def showTB():
     cursor.execute(showTable)
     tbs = cursor.fetchall()
     print(tbs)
-    return f"{tbs}"
+    return jsonify(tbs)
+
+@app.route("/")
+def hello():
+    return "Hello World"
 
 if __name__ == '__main__':
     app.run(debug=True)
