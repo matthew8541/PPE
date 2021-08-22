@@ -7,18 +7,18 @@ const API = axios.create({ baseURL: 'http://localhost:5000' });
 function App() {
   const [table, setTable] = useState([]);
 
+  const getTables = async () => {
+    try {
+      const res = await API.get("/tables");
+      // console.log(res.data)
+      return res.data
+    } catch (e) {
+      console.log(e)
+    }
+  }
   
   useEffect(() => {
-    const getTables = async () => {
-      try {
-        const res = await API.get("/tables");
-        // console.log(res.data)
-        setTable(res.data)
-      } catch (e) {
-        console.log(e)
-      }
-    }
-    getTables();
+    getTables().then(data => setTable(data));
   }, [])
 
   if (!table) {

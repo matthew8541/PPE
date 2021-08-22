@@ -15,19 +15,32 @@ PORT = os.getenv("PORT")
 # init Flask app
 app = Flask(__name__)
 CORS(app)
-db = pymysql.connect(host=ENDPOINT, user=USERNAME, password=PASSWORD, db=DB_NAME)
-cursor = db.cursor()
 
-showTable = """
-    show tables
-"""
+db = pymysql.connect(host=ENDPOINT, user=USERNAME,
+                     password=PASSWORD, db=DB_NAME)
+cursor = db.cursor()
 
 @app.route('/tables')
 def showTB():
+    showTable = """
+        show tables
+    """
     cursor.execute(showTable)
     tbs = cursor.fetchall()
-    print(tbs)
     return jsonify(tbs)
+
+
+@app.route('/<table>')
+def showTableDetail(table):
+    query = f"""
+        SELECT * 
+        FROM {table}
+    """
+    try: 
+        cursor.execute(query)
+        return jsonify(cursor.fetchall())
+    except:
+        return f"{table} is not found in the database"
 
 @app.route("/")
 def hello():
@@ -35,5 +48,3 @@ def hello():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
