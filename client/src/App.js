@@ -16,12 +16,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>PPE Database Manager</h1>
-        {table.map((tb, idx) => 
-          <p key={idx}>{tb}</p>
-        )}
-      </header>
+      <h1>PPE Database Manager</h1>
+      {table.map((tb, idx) => 
+        <p key={idx}>{tb}</p>
+      )}
     </div>
   );
 }
