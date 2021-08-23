@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client": "npm start --prefix client",
+    "build": "concurrently \"cd client && npm run build\" \"npm build \"",
     "server": "python3 server/app.py",
     "dev": "concurrently --kill-others  \"npm run client\" \"npm run server\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/matthew8541/PPE/issues"
   },
-  "homepage": "https://github.com/matthew8541/PPE#readme"
+  "homepage": "https://github.com/matthew8541/PPE#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
 }
