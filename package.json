@@ -4,6 +4,9 @@
   "description": "1. Client    - React",
   "main": "index.js",
   "scripts": {
+    "client": "npm start --prefix client",
+    "server": "python3 server/app.py",
+    "dev": "concurrently --kill-others  \"npm run client\" \"npm run server\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

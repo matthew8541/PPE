@@ -14,6 +14,7 @@ PORT = os.getenv("PORT")
 
 # init Flask app
 app = Flask(__name__)
+# allow Cross-Origin Resource Sharing
 CORS(app)
 
 db = pymysql.connect(host=ENDPOINT, user=USERNAME,
@@ -27,8 +28,9 @@ def showTB():
     """
     cursor.execute(showTable)
     tbs = cursor.fetchall()
-    return jsonify(tbs)
-
+    # restructure output data
+    tables = [tb[0] for tb in tbs]
+    return jsonify(tables)
 
 @app.route('/<table>')
 def showTableDetail(table):
