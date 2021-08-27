@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 import pymysql
 
+from query import fetchManufacture, fetchInventory, fetchRecentTransaction, fetchTableDetail
+
 # load .env secret to python file
 load_dotenv()
 ENDPOINT = os.getenv("AWS_RDS_ENDPOINT")
@@ -21,6 +23,7 @@ db = pymysql.connect(host=ENDPOINT, user=USERNAME,
                      password=PASSWORD, db=DB_NAME)
 cursor = db.cursor()
 
+
 @app.route('/tables')
 def showTB():
     showTable = """
@@ -34,15 +37,26 @@ def showTB():
 
 @app.route('/<table>')
 def showTableDetail(table):
-    query = f"""
-        SELECT * 
-        FROM {table}
-    """
-    try: 
-        cursor.execute(query)
-        return jsonify(cursor.fetchall())
-    except:
-        return f"{table} is not found in the database"
+    return jsonify({
+        "table": fetchTableDetail(cursor, table)
+    })
+
+@app.route("/purchase/<hospital>")
+def showPurchase(hospital):
+    hospital = " ".join(hospital.split("_"))
+
+    return jsonify({
+        "manufacturer": fetchManufacture(cursor)
+    })
+
+@app.route("/dashboard/<hospital>")
+def showDashBoard(hospital):
+    hospital = " ".join(hospital.split("_"))
+
+    return jsonify({
+        "recent_transaction": fetchRecentTransaction(cursor, hospital),
+        "inventory": fetchInventory(cursor, hospital)
+    })
 
 @app.route("/")
 def hello():
