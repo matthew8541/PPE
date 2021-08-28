@@ -9,3 +9,12 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.center {
+  text-align: center;
+}
+
+.chart {
+  margin: 3rem auto;
+  width: 50%;
+}

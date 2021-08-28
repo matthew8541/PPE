@@ -6,7 +6,7 @@ import pymysql
 
 from query import fetchManufacture, fetchInventory, fetchRecentTransaction, fetchTableDetail
 
-# load .env secret to python file
+# load .env secrets to python file
 load_dotenv()
 ENDPOINT = os.getenv("AWS_RDS_ENDPOINT")
 DB_NAME = os.getenv("AWS_RDS_DB_NAME")
