@@ -2,7 +2,7 @@ def fetchManufacture(cursor):
     manufacturerQuery = f"""
         SELECT *
         FROM InventoryHasProduct i INNER JOIN Product p ON i.product_id=p.id
-        WHERE i.inventory_business in (
+        WHERE i.inventory_business IN (
             SELECT name
             FROM Manufacturer
         )
@@ -29,10 +29,11 @@ def fetchInventory(cursor, hospital):
 
 def fetchRecentTransaction(cursor, hospital, limit=3):
     recentTransactionQuery = f"""
-        SELECT CONCAT(p.name_color, ' ', p.name_type), ti.manufacturer, ti.count, DATE_FORMAT(t.date, '%Y-%m-%d')
+        SELECT CONCAT(p.name_color, ' ', p.name_type), ti.manufacturer, ti.count, FORMAT(ci.price, 2), FORMAT(ti.count*ci.price, 2), DATE_FORMAT(t.date, '%Y-%m-%d')
         FROM TransactionItem ti 
-            INNER JOIN Product p ON ti.product_id=p.id
+            INNER JOIN Product p ON p.id=ti.product_id
             INNER JOIN Transaction t ON t.id=ti.transaction_id
+            INNER JOIN CatalogItem ci ON ci.product_id=ti.product_id
         WHERE t.hospital='{hospital}'
         ORDER BY DATE(t.date) DESC
         LIMIT {limit};

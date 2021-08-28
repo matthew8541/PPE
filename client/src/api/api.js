@@ -4,7 +4,24 @@ const axios = require("axios");
 export const getTables = async () => {
   try {
     const res = await axios.get("/tables");
-    // console.log(res.data)
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const getDashBoard = async (hospital) => {
+  try {
+    const res = await axios.get(`/dashboard/${hospital}`);
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const getPurchase = async (hospital) => {
+  try {
+    const res = await axios.get(`/purchase/${hospital}`);
     return res.data
   } catch (e) {
     console.log(e)
