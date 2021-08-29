@@ -1,7 +1,12 @@
+import ControlledCarousel from "../components/carousel";
+
 const Intro = () => {
   return (
     <div className="App">
-      <h1>Intro</h1>
+      <h1>Welcome to PPE Manager</h1>
+      <div className="chart">
+        <ControlledCarousel />
+      </div>
     </div>
   )
 }
