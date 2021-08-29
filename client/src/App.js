@@ -5,13 +5,15 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+import './App.css';
 import DashBoard from "./pages/dashBoard";
 import Purchase from "./pages/purchase";
 import Intro from "./pages/intro";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import NavBar from "./components/navBar";
 
 import { getTables } from "./api/api";
 
@@ -24,19 +26,23 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <Switch>
-        <Route path="/" exact component={Intro} />
-        <Route path="/dashboard" component={DashBoard} />
-        <Route path="/purchase" component={Purchase} />
-        <Route path="/register">
-          {!isLogin ? <Register /> : <Redirect to="/" />}
-        </Route>
-        <Route path="/login">
-          {!isLogin ? <Login /> : <Redirect to="/" />}
-        </Route>
-        <Route path='*' component={() => <Redirect to="/" />} />
-      </Switch>
+    <div>
+      <NavBar />
+      <div className="App">
+
+        <Switch>
+          <Route path="/" exact component={Intro} />
+          <Route path="/dashboard" component={DashBoard} />
+          <Route path="/purchase" component={Purchase} />
+          <Route path="/register">
+            {!isLogin ? <Register /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/login">
+            {!isLogin ? <Login /> : <Redirect to="/" />}
+          </Route>
+          <Route path='*' component={() => <Redirect to="/" />} />
+        </Switch>
+      </div>
     </div>
   );
 }
