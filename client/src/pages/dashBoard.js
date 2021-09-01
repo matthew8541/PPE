@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getDashBoard } from "../api/api";
 
-import { InventoryBarChart } from "../components/charts";
+import { CategoryBarChart } from "../components/charts";
 
 const DashBoard = () => {
   const [inventory, setInventory] = useState([]);
@@ -27,18 +27,10 @@ const DashBoard = () => {
     )
   }
 
-  // if (inventory.length === 0) {
-  //   return (
-  //     <div>
-  //       <h1>Loading...</h1>
-  //     </div>
-  //   )
-  // }
-
   return (
     <div>
       <h1>DashBoard</h1>
-      <InventoryBarChart inventory={inventory}/>
+      <CategoryBarChart inventory={inventory}/>
     </div>
   )
 }
