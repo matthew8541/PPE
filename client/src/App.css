@@ -16,5 +16,23 @@
 
 .chart {
   margin: 3rem auto;
-  width: 50%;
+  width: 60%;
+}
+
+.form {
+  margin: 3rem auto;
+  padding: 3rem;
+  width: 40%;
+  background-color: mediumslateblue;
+  border-radius: 3%;
+}
+
+@media screen and (max-width: 760px) {
+  .form {
+    width: 90%;
+  }
+
+  .chart {
+    width: 90%;
+  }
 }

@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/matthew8541/PPE#readme",
   "dependencies": {
-    "concurrently": "^6.2.1"
+    "concurrently": "^6.2.1",
+    "react-bootstrap-icons": "^1.5.0"
   }
 }
