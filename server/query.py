@@ -29,7 +29,7 @@ def fetchInventory(cursor, hospital):
 
 def fetchRecentTransaction(cursor, hospital, limit=3):
     recentTransactionQuery = f"""
-        SELECT CONCAT(p.name_color, ' ', p.name_type), ti.manufacturer, ti.count, FORMAT(ci.price, 2), FORMAT(ti.count*ci.price, 2), DATE_FORMAT(t.date, '%Y-%m-%d')
+        SELECT p.name_color, p.name_type, ti.manufacturer, ti.count, ci.price, ti.count*ci.price, DATE_FORMAT(t.date, '%Y-%m-%d')
         FROM TransactionItem ti 
             INNER JOIN Product p ON p.id=ti.product_id
             INNER JOIN Transaction t ON t.id=ti.transaction_id
