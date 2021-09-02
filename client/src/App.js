@@ -15,11 +15,9 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import NavBar from "./components/navBar";
 
-import { getTables } from "./api/api";
-
 function App() {
   const isLogin = useSelector(state => state.auth.isLogin);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     // getTables().then(data => setTable(data));

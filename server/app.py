@@ -54,7 +54,7 @@ def showDashBoard(hospital):
     hospital = " ".join(hospital.split("_"))
 
     return jsonify({
-        "recent_transaction": fetchRecentTransaction(cursor, hospital),
+        "recent_transaction": fetchRecentTransaction(cursor, hospital, limit=5),
         "inventory": fetchInventory(cursor, hospital)
     })
 
